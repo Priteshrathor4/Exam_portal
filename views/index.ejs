@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SGL | Online Exam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+    <meta name="author" content="FREEHTML5.CO" />
+
+
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Superfish -->
+    <link rel="stylesheet" href="css/superfish.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+    <!-- CS Select -->
+    <link rel="stylesheet" href="css/cs-select.css">
+    <link rel="stylesheet" href="css/cs-skin-border.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <!-- Modernizr JS -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body onload="loadFun()">
+    <div id="fh5co-wrapper">
+        <div id="fh5co-page">
+            <header id="fh5co-header-section" class="sticky-banner">
+                <div class="container">
+                    <div class="nav-header">
+                        <!-- <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a> -->
+                        <h1 id="fh5co-logo"><a href="index.html"><i class="icon-file-text"></i>SGL ONLINE EXAM</a></h1>
+                        <!-- START #fh5co-menu-wrap -->
+                        <!-- <nav id="fh5co-menu-wrap" role="navigation">
+                            <ul class="sf-menu" id="fh5co-primary-menu">
+                                <li class="active"><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </nav> -->
+                    </div>
+                </div>
+            </header>
+
+            <!-- end:header-top -->
+
+            <div class="fh5co-hero">
+                <div class="fh5co-overlay"></div>
+                <div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_1.jpg);">
+                    <div class="desc">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-7 col-md-6 col-xs-12 col-xxs-12">
+                                    <div class="tabulation animate-box">
+
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active" id="login_tab">
+                                                <a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a>
+                                            </li>
+                                            <li role="presentation" id="register_tab">
+                                                <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">Sign Up</a>
+                                            </li>
+                                        </ul>
+
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+
+                                            <% if(success.length>0) {%>
+                                                <div class="alert alert-success">
+                                                    <%= success %>
+                                                </div>
+                                                <% } %>
+                                                    <% if(error.length>0) {%>
+                                                        <div class="alert alert-danger">
+                                                            <%= error %>
+                                                        </div>
+                                                        <% } %>
+                                                            <% if(errorSignup.length>0) {%>
+                                                                <div class="alert alert-danger">
+                                                                    <%= errorSignup %>
+                                                                </div>
+                                                                <% } %>
+                                                                    <div role="tabpanel" class="tab-pane active" id="login">
+                                                                        <div class="row">
+                                                                            <form class="contact__form" method="post" name="loginForm" id="loginForm">
+                                                                                <div class="col-xs-12 mt">
+                                                                                    <div class="input-field">
+                                                                                        <input class="form-control" name="email" type="email" id="femail" placeholder="Enter Your email">
+                                                                                        <small id="lerr_email" class="mx-4 px-3 error"></small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xs-12 mt">
+                                                                                    <div class="input-field">
+                                                                                        <input class="form-control" id="pwd" name="password" type="password" placeholder="Enter Your Password">
+                                                                                        <small id="lerr_pwd" class="mx-4 px-3 error"></small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xs-12">
+                                                                                    <input id="submitLogin" name="submit" type="submit" class="btn btn-primary btn-block" value="Login">
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div role="tabpanel" class="tab-pane" id="signup">
+                                                                        <div class="row">
+                                                                            <form class="contact__form" method="post" id="registerForm" name="registerForm">
+                                                                                <div class="col-xs-12 mt">
+                                                                                    <div class="input-field">
+                                                                                        <input class=" form-control" name="name" id="Fstudentname" type="text" placeholder="Enter Your Name">
+                                                                                        <small id="err_name" class="mx-4 px-3 error"></small>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-xs-12 mt">
+                                                                                    <div class="input-field">
+                                                                                        <input class="form-control" name="username" id="fusername" type="text" placeholder="Enter Your Username">
+                                                                                        <small id="err_username" class="mx-4 px-3 error"></small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- <div class="col-xs-12 mt">
+                                                            <select class="cs-select cs-skin-border" id="drdow2" name="exam">
+															<option value="">Select Your Interested Exam</option>
+															<option value="HTML">HTML</option>
+															<option value="CSS">CSS</option>
+															<option value="JavaScript">JavaScript</option>  
+														</select>
+                                                            <small id="err_exam" class="mx-4 px-3 error"></small>
+                                                        </div> -->
+                                                                                <div class="col-xs-12 mt">
+                                                                                    <div class="input-field">
+                                                                                        <input class="form-control" name="email" type="email" id="fremail" placeholder="Enter Your email">
+                                                                                        <small id="err_email" class="mx-4 px-3 error"></small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xs-12 mt">
+                                                                                    <select class="cs-select cs-skin-border" id="drdow" name="qualification">
+                                                                <option value="">Select Your Highest Qualification
+                                                                </option>
+                                                                <option value="10th">10th</option>
+                                                                <option value="12th">12th</option>
+                                                                <option value="Diploma">Diploma</option>
+                                                                <option value="Bachelor">Bachelor</option>
+                                                                <option value="masters">masters</option>
+                                                                <option value="PHD">PHD</option>
+                                                            </select><small id="err_qualification" class="mx-4 px-3 error"></small>
+                                                                                </div>
+                                                                                <div class="col-xs-12 mt">
+                                                                                    <div class="input-field">
+                                                                                        <input class="form-control" id="rpwd" name="password" type="password" placeholder="Enter Your Password">
+                                                                                        <small id="err_password" class="mx-4 px-3 error"></small>
+
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-xs-12">
+                                                                                    <input id="submitRgister" name="submit" type="submit" class="btn btn-primary btn-block" value="Sign up">
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="desc2 animate-box">
+                                    <div class="col-sm-5 col-sm-push-1 col-xs-12 col-xxs-12 col-md-6 col-md-push-1">
+                                        <!-- <img ris src="images/home.png"> -->
+                                        <!-- <img src="images/home.png" class="img-fluid" style="height: 250px;" alt="Responsive image"> -->
+                                        <p>Powered by <a href="https://www.sgligis.com/" target="_blank" class="fh5co-site-name">Scanpoint Geomatics Ltd</a></p>
+                                        <h2>Discover The Most Exciting Online Quiz.</h2>
+                                        <!-- <h3>Fly to Hong Kong via Los Angeles, USA</h3>
+                                        <span class="price">$599</span> -->
+                                        <!-- <p><a class="btn btn-primary btn-lg" href="#">Get Started</a></p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <footer>
+                <div id="footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 text-center">
+                                <p class="fh5co-social-icons">
+                                    <a href="https://www.sgligis.com/" target="_blank"><i class="icon-twitter2"></i></a>
+                                    <a href="https://www.sgligis.com/" target="_blank"><i class="icon-facebook2"></i></a>
+                                    <a href="https://www.sgligis.com/" target="_blank"><i class="icon-instagram"></i></a>
+                                    <a href="https://www.sgligis.com/" target="_blank"><i class="icon-dribbble2"></i></a>
+                                    <a href="https://www.sgligis.com/" target="_blank"><i class="icon-youtube"></i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer> -->
+        </div>
+        <!-- END fh5co-page -->
+
+    </div>
+    <!-- END fh5co-wrapper -->
+
+    <!-- jQuery -->
+
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Waypoints -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/sticky.js"></script>
+
+    <!-- Stellar -->
+    <script src="js/jquery.stellar.min.js"></script>
+    <!-- Superfish -->
+    <script src="js/hoverIntent.js"></script>
+    <script src="js/superfish.js"></script>
+    <!-- Magnific Popup -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/magnific-popup-options.js"></script>
+    <!-- Date Picker -->
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <!-- CS Select -->
+    <script src="js/classie.js"></script>
+    <script src="js/selectFx.js"></script>
+
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+    <script>
+        function loadFun() {
+            if ('<%= errorSignup.length %>' == 1) {
+                $('#login_tab').removeClass('active')
+                $('#login').removeClass('active')
+                $('#register_tab').addClass('active')
+                $('#signup').addClass('active')
+            }
+
+        }
+    </script>
+
+
+
+</body>
+
+</html>

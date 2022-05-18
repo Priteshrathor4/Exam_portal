@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <!--====form section start====-->
+    <div class="user-detail">
+        <h2>Create User Data</h2>
+        <form action="/formPost" method="POST">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter Full Name" name="name" required>
+            <label>Email</label>
+            <input type="email" placeholder="Enter Email" name="email" required>
+            <label>Username</label>
+            <input type="text" placeholder="Enter username" name="username" required>
+            <label>Password</label>
+            <input type="password" placeholder="Enter password" name="password" required>
+            <label>Exam</label>
+            <select name="exam" id="exam">
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">JavaScript</option>
+            </select>
+            <label>Qualification</label>
+            <select name="qualification" id="qualification">
+                <option value="10th">10 th</option>
+                <option value="12th">12 th</option>
+                <option value="be">B.E.</option>
+            </select>
+            <button type="submit">Submit</button>
+    </div>
+    </div>
+    <!--====form section start====-->
+</body>
+
+</html>
