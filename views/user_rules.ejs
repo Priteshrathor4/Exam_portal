@@ -18,35 +18,28 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+
+    <!-- data table  -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <style>
         /* .table-striped{ */
         
-        tr:nth-child(even) {
-            background-color: #f89149;
+        #mytable th {
+            text-align: center;
+            background-color: #f89149 !important;
+        }
+        
+        #mytable td,
+        th {
+            padding: 15px !important;
+        }
+        
+        #mytable tbody tr {
+            background-color: rgba(0, 0, 0, 0);
         }
         /* } */
     </style>
-    <style>
-        .pagination span {
-            margin-top: 20px;
-            color: black;
-            float: left;
-            align-items: center;
-            background-color: #f89149;
-            padding: 8px 16px;
-            text-decoration: none;
-            transition: background-color .3s;
-        }
-        
-        .pagination span.active {
-            background-color: dodgerblue;
-            color: white;
-        }
-        
-        .pagination span:hover:not(.active) {
-            background-color: #ddd;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -117,33 +110,41 @@
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="/admin">
                         <span class="menu-icon">
-                            <i class="mdi mdi-speedometer"></i>
-                        </span>
+              <i class="mdi mdi-speedometer"></i>
+            </span>
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="/quiz_table">
                         <span class="menu-icon">
-                            <i class="mdi mdi-quicktime"></i>
-                        </span>
+              <i class="mdi mdi-quicktime"></i>
+            </span>
                         <span class="menu-title">Quiz</span>
                     </a>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="/user">
                         <span class="menu-icon">
-                            <i class="mdi mdi-table-large"></i>
-                        </span>
+              <i class="mdi mdi-account-box"></i>
+            </span>
                         <span class="menu-title">User</span>
                     </a>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="/rules">
                         <span class="menu-icon">
-                            <i class="mdi mdi-table-large"></i>
-                        </span>
+              <i class="mdi mdi-file-document-box-outline"></i>
+            </span>
                         <span class="menu-title">Rules</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="result">
+                        <span class="menu-icon">
+              <i class="mdi mdi-table-large"></i>
+            </span>
+                        <span class="menu-title">Result</span>
                     </a>
                 </li>
 
@@ -160,8 +161,8 @@
                 </div>
                 <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                        <span class="mdi mdi-menu"></span>
-                    </button>
+            <span class="mdi mdi-menu"></span>
+          </button>
                     <!-- <ul class="navbar-nav w-100">
                         <li class="nav-item w-100">
                             <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
@@ -352,8 +353,8 @@
                         </li>
                     </ul>
                     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                        <span class="mdi mdi-format-line-spacing"></span>
-                    </button>
+            <span class="mdi mdi-format-line-spacing"></span>
+          </button>
                 </div>
             </nav>
             <!-- partial -->
@@ -379,7 +380,8 @@
                                                 <nav aria-label="breadcrumb">
                                                     <ol class="breadcrumb">
                                                         <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-                                                        <li class="breadcrumb-item active" aria-current="page">User Rules</li>
+                                                        <li class="breadcrumb-item active" aria-current="page">User Rules
+                                                        </li>
                                                     </ol>
                                                 </nav>
                     </div>
@@ -387,20 +389,6 @@
                         <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="form-group" style="width: 100px;">
-                                        <!--		Show Numbers Of Rows 		-->
-                                        <select class="form-control" name="state" id="maxRows">
-                                            <option value="5000">Show ALL Rows</option>
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                            <option value="50">50</option>
-                                            <option value="70">70</option>
-                                            <option value="100">100</option>
-                                           </select>
-
-                                    </div>
                                     <a class="float-sm-right nav-link btn btn-secondary create-new-button" id="show" aria-expanded="false">Add Rules</a>
 
                                 </div>
@@ -411,16 +399,15 @@
                                                 <tr>
                                                     <th>Sr No</th>
                                                     <th> Rules Description </th>
-                                                    <th colspan="2"> operation </th>
+                                                    <th> Edit </th>
+                                                    <th> Delete </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% for(let i=0; i<rules.length; i++){ 
-                                                    let rule = rules[i].rules;
-                                                    let id = rules[i].id;
-                                                    %>
+                                                <% for(let i=0; i<rules.length; i++){ let rule=rules[i].rules; let
+                                                    id=rules[i].id; %>
                                                     <tr>
-                                                        <td>
+                                                        <td style="text-align: center;">
                                                             <%= i+1 %>
                                                         </td>
                                                         <td>
@@ -428,30 +415,18 @@
                                                         </td>
 
 
-                                                        <td>
-                                                            <a class="nav-link btn btn-primary create-new-button" id="rule" aria-expanded="false" href="#" onclick="showUpdate('<%= id %>','<%= rule%>' )">Update</a>
+                                                        <td style="text-align: center;">
+                                                            <a class="btn btn-primary show" id="rule" aria-expanded="false" href="#" onclick="showUpdate('<%= id %>','<%= rule%>' )"><i class="mdi mdi-square-edit-outline"></i></a>
                                                         </td>
-                                                        <td>
-                                                            <a class="nav-link btn btn-danger create-new-button" id="deleteuser" aria-expanded="false" href="/rule/<%=rules[i].id%>">Delete</a>
-                                                            <!-- <a class="nav-link btn btn-danger create-new-button" id="deleteuser" aria-expanded="false" href="#">Delete</a> -->
+                                                        <td style="text-align: center;">
+                                                            <a class="btn btn-danger" id="deleteuser" aria-expanded="false" href="/rule/<%=rules[i].id%>"><i class="mdi mdi-delete"></i></a>
+
                                                         </td>
                                                     </tr>
                                                     <% } %>
                                             </tbody>
                                         </table>
-                                        <div class="pagination-container">
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination pagination-lg">
-                                                    <li data-page="prev">
-                                                        <span> < <span class="sr-only">(current)</span></span>
-                                                    </li>
-                                                    <!--	Here the JS Function Will Add the Rows -->
-                                                    <li data-page="next" id="prev">
-                                                        <span> > <span class="sr-only">(current)</span></span>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -487,7 +462,7 @@
 
                             <div class="form-group row">
                                 <label for="rule" class="col-sm-3 col-form-label">Rule
-                                    </label>
+                </label>
                                 <div class="col-sm-9">
                                     <textarea type="text" class="form-control" id="rule" name="rule" placeholder="Enter Rule"></textarea>
                                     <small id="err_rule" class="error"></small>
@@ -497,7 +472,8 @@
 
 
                             <div class="float-right">
-                                <button type="submit" style="width: 200px;" id="ruleSubmit" class="btn btn-primary">Add Rule</button>
+                                <button type="submit" style="width: 200px;" id="ruleSubmit" class="btn btn-primary">Add
+                  Rule</button>
                                 <button type="reset" class="btn btn-danger" id="userCancel" style="width: 200px;">Reset</button>
                             </div>
                         </form>
@@ -521,7 +497,7 @@
 
                             <div class="form-group row">
                                 <label for="rule" class="col-sm-3 col-form-label">Rule
-                                    </label>
+                </label>
                                 <div class="col-sm-9">
                                     <textarea class="form-control" id="rule" name="rule" placeholder="Enter Rule"></textarea>
                                     <small id="err_rule" class="error"></small>
@@ -562,6 +538,7 @@
         });
         $("#hide").click(function() {
             $('#myModal').modal('hide');
+
         });
 
         function showUpdate(id, rule) {
@@ -587,118 +564,17 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
-
-
+    <!-- data tabel script -->
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
     <script>
-        getPagination('#mytable');
-
-        function getPagination(table) {
-            var lastPage = 1;
-
-            $('#maxRows')
-                .on('change', function(evt) {
-                    lastPage = 1;
-                    $('.pagination')
-                        .find('li')
-                        .slice(1, -1)
-                        .remove();
-                    var trnum = 0;
-                    var maxRows = parseInt($(this).val());
-                    if (maxRows == 5000) {
-                        $('.pagination').hide();
-                    } else {
-                        $('.pagination').show();
-                    }
-                    var totalRows = $(table + ' tbody tr').length;
-                    $(table + ' tr:gt(0)').each(function() {
-                        trnum++;
-                        if (trnum > maxRows) {
-                            $(this).hide();
-                        }
-                        if (trnum <= maxRows) {
-                            $(this).show();
-                        }
-                    });
-                    if (totalRows > maxRows) {
-                        var pagenum = Math.ceil(totalRows / maxRows);
-                        for (var i = 1; i <= pagenum;) {
-                            $('.pagination #prev')
-                                .before(
-                                    '<li data-page="' +
-                                    i +
-                                    '">\
-								  <span>' +
-                                    i++ +
-                                    '<span class="sr-only">(current)</span></span>\
-								</li>'
-                                )
-                                .show();
-                        }
-                    }
-                    $('.pagination [data-page="1"]').addClass('active');
-                    $('.pagination li').on('click', function(evt) {
-                        evt.stopImmediatePropagation();
-                        evt.preventDefault();
-                        var pageNum = $(this).attr('data-page');
-
-                        var maxRows = parseInt($('#maxRows').val());
-
-                        if (pageNum == 'prev') {
-                            if (lastPage == 1) {
-                                return;
-                            }
-                            pageNum = --lastPage;
-                        }
-                        if (pageNum == 'next') {
-                            if (lastPage == $('.pagination li').length - 2) {
-                                return;
-                            }
-                            pageNum = ++lastPage;
-                        }
-
-                        lastPage = pageNum;
-                        var trIndex = 0;
-                        $('.pagination li').removeClass('active');
-                        $('.pagination [data-page="' + lastPage + '"]').addClass('active');
-                        limitPagging();
-                        $(table + ' tr:gt(0)').each(function() {
-                            trIndex++;
-                            if (
-                                trIndex > maxRows * pageNum ||
-                                trIndex <= maxRows * pageNum - maxRows
-                            ) {
-                                $(this).hide();
-                            } else {
-                                $(this).show();
-                            }
-                        });
-                    });
-                    limitPagging();
-                })
-                .val(5)
-                .change();
-        }
-
-        function limitPagging() {
-            if ($('.pagination li').length > 7) {
-                if ($('.pagination li.active').attr('data-page') <= 3) {
-                    $('.pagination li:gt(5)').hide();
-                    $('.pagination li:lt(5)').show();
-                    $('.pagination [data-page="next"]').show();
-                }
-                if ($('.pagination li.active').attr('data-page') > 3) {
-                    $('.pagination li:gt(0)').hide();
-                    $('.pagination [data-page="next"]').show();
-                    for (let i = (parseInt($('.pagination li.active').attr('data-page')) - 2); i <= (parseInt($('.pagination li.active').attr('data-page')) + 2); i++) {
-                        $('.pagination [data-page="' + i + '"]').show();
-
-                    }
-
-                }
-            }
-        }
+        $(() => {
+            $('#mytable').DataTable();
+        });
     </script>
+
+
+
 </body>
 
 </html>

@@ -19,35 +19,32 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
 
+    <!-- data table  -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <style>
         /* .table-striped{ */
         
-        tr:nth-child(even) {
-            background-color: #f89149;
+        .scrollme {
+            overflow-x: auto;
+        }
+        
+        #mytable th {
+            text-align: center;
+            background-color: #f89149 !important;
+        }
+        
+        #mytable td,
+        th {
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+        }
+        
+        #mytable tbody tr {
+            background-color: rgba(0, 0, 0, 0);
         }
         /* } */
     </style>
-    <style>
-        .pagination span {
-            margin-top: 20px;
-            color: black;
-            float: left;
-            align-items: center;
-            background-color: #f89149;
-            padding: 8px 16px;
-            text-decoration: none;
-            transition: background-color .3s;
-        }
-        
-        .pagination span.active {
-            background-color: dodgerblue;
-            color: white;
-        }
-        
-        .pagination span:hover:not(.active) {
-            background-color: #ddd;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -134,7 +131,7 @@
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="/user">
                         <span class="menu-icon">
-                            <i class="mdi mdi-table-large"></i>
+                            <i class="mdi mdi-account-box"></i>
                         </span>
                         <span class="menu-title">User</span>
                     </a>
@@ -142,9 +139,17 @@
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="/rules">
                         <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
+                            <i class="mdi mdi-file-document-box-outline"></i>
+                        </span>
                         <span class="menu-title">Rules</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="result">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-table-large"></i>
+                        </span>
+                        <span class="menu-title">Result</span>
                     </a>
                 </li>
 
@@ -393,36 +398,25 @@
                         <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="form-group" style="width: 100px;">
-                                        <!--		Show Numbers Of Rows 		-->
-                                        <select class="form-control" name="state" id="maxRows">
-                                            <option value="5000">Show ALL Rows</option>
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                            <option value="50">50</option>
-                                            <option value="70">70</option>
-                                            <option value="100">100</option>
-                                           </select>
 
-                                    </div>
                                     <a class="float-sm-right nav-link btn btn-secondary create-new-button" id="show" aria-expanded="false" href="#">Add Quizs</a>
 
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive scrollme">
                                         <table class="table" id="mytable">
                                             <thead>
                                                 <tr>
-                                                    <th>Sr No</th>
-                                                    <th> Question </th>
-                                                    <th> Option 1 </th>
-                                                    <th> Option 2 </th>
-                                                    <th> Option 3 </th>
-                                                    <th> Option 4 </th>
-                                                    <th> Language </th>
-                                                    <th colspan="2"> Operation </th>
+                                                    <th>No</th>
+                                                    <th>Question</th>
+                                                    <th> A </th>
+                                                    <th> B </th>
+                                                    <th> C </th>
+                                                    <th> D </th>
+                                                    <th> Answer </th>
+                                                    <th> Subject </th>
+                                                    <th>Edit</th>
+                                                    <th>Delete</th>
 
 
                                                 </tr>
@@ -435,11 +429,12 @@
                                                     let opt2 = que2[i].optionb;
                                                     let opt3 = que2[i].optionc;
                                                     let opt4 = que2[i].optiond;
+                                                    let ans = que2[i].answer;
                                                     let language = que2[i].language;
                                                     %>
                                                     <!-- que2[i].id -->
                                                     <tr>
-                                                        <td>
+                                                        <td style="text-align: center;">
                                                             <%= i+1 %>
                                                         </td>
                                                         <td>
@@ -457,7 +452,10 @@
                                                         <td>
                                                             <%= opt4 %>
                                                         </td>
-                                                        <td style="color: #191c24;">
+                                                        <td style="text-align: center;">
+                                                            <%= ans  %>
+                                                        </td>
+                                                        <td style="color: #191c24;text-align: center;">
                                                             <% if(language  == "1"){ %>
                                                                 HTML
                                                                 <%}
@@ -470,28 +468,19 @@
                                                         </td>
 
                                                         <td>
-                                                            <a class="nav-link btn btn-primary create-new-button" id="updateuser" aria-expanded="false" href="#" onclick="showUpdate('<%= id %>','<%= que %>','<%= opt1 %>','<%= opt2 %>','<%= opt3 %>','<%= opt4 %>','<%= language %>')">Update</a>
+                                                            <a class="btn btn-primary " id="updateuser" aria-expanded="false" href="#" onclick="showUpdate('<%= id %>','<%= que %>','<%= opt1 %>','<%= opt2 %>','<%= opt3 %>','<%= opt4 %>','<%= ans %> ','<%= language %>')"><i
+                                                                class="mdi mdi-square-edit-outline"></i></a>
                                                         </td>
                                                         <td>
-                                                            <a class="nav-link btn btn-danger create-new-button" id="deleteuser" aria-expanded="false" href="/quiz/<%=que2[i].id%>">Delete</a>
+                                                            <a class="btn btn-danger" id="deleteuser" aria-expanded="false" href="/quiz/<%=que2[i].id%>">
+                                                                <i class="mdi mdi-delete"></i>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                     <% } %>
                                             </tbody>
                                         </table>
-                                        <div class="pagination-container">
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination pagination-lg">
-                                                    <li data-page="prev">
-                                                        <span> < <span class="sr-only">(current)</span></span>
-                                                    </li>
-                                                    <!--	Here the JS Function Will Add the Rows -->
-                                                    <li data-page="next" id="prev">
-                                                        <span> > <span class="sr-only">(current)</span></span>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -546,7 +535,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="opt1" class="col-sm-3 col-form-label">Option
-                                    One</label>
+                                    A</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="opt1" id="opt1" placeholder="Enter Option One">
 
@@ -555,7 +544,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="opt2" class="col-sm-3 col-form-label">Option
-                                    Two</label>
+                                    B</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="opt2" id="opt2" placeholder="Enter Option Two">
                                     <small id="err_opt2" class="error"></small>
@@ -563,7 +552,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="opt3" class="col-sm-3 col-form-label">Option
-                                    Three</label>
+                                    C</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="opt3" id="opt3" placeholder="Enter Option three">
                                     <small id="err_opt3" class="error"></small>
@@ -571,14 +560,30 @@
                             </div>
                             <div class="form-group row">
                                 <label for="opt4" class="col-sm-3 col-form-label">Option
-                                    Four</label>
+                                    D</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="opt4" id="opt4" placeholder="Enter Option four">
                                     <small id="err_opt4" class="error"></small>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="answer" class="col-sm-3 col-form-label">Answer</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="answer" name="answer">
+                                        <option value="">Select Answer
+                                        </option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                    <small id="err_answer" class="error"></small>
+                                </div>
+                            </div>
+
                             <div class="float-right">
-                                <button type="submit" style="width: 200px;" id="quizSubmit" class="btn btn-primary">Add Quiz</button>
+                                <button type="submit" style="width: 200px;" id="quizSubmit" class="btn btn-primary">Add
+                                    Quiz</button>
                                 <button type="reset" class="btn btn-danger" id="quizCancel" style="width: 200px;">Reset</button>
                             </div>
                         </form>
@@ -615,13 +620,12 @@
                                 <label for="question" class="col-sm-3 col-form-label">Question</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="question" id="question" placeholder="Enter Question">
-
                                     <small id="err_que" class="error"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="opt1" class="col-sm-3 col-form-label">Option
-                                    One</label>
+                                    A</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="opt1" id="opt1" placeholder="Enter Option One">
 
@@ -630,7 +634,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="opt2" class="col-sm-3 col-form-label">Option
-                                    Two</label>
+                                    B</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="opt2" id="opt2" placeholder="Enter Option Two">
                                     <small id="err_opt2" class="error"></small>
@@ -638,7 +642,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="opt3" class="col-sm-3 col-form-label">Option
-                                    Three</label>
+                                    C</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="opt3" id="opt3" placeholder="Enter Option three">
                                     <small id="err_opt3" class="error"></small>
@@ -646,10 +650,24 @@
                             </div>
                             <div class="form-group row">
                                 <label for="opt4" class="col-sm-3 col-form-label">Option
-                                    Four</label>
+                                    D</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="opt4" id="opt4" placeholder="Enter Option four">
                                     <small id="err_opt4" class="error"></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="answer" class="col-sm-3 col-form-label">Answer</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="answer" name="answer">
+                                        <option value="">Select Answer
+                                        </option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                    <small id="err_answer" class="error"></small>
                                 </div>
                             </div>
                             <div class="float-right">
@@ -678,134 +696,7 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->
-    <script>
-        getPagination('#mytable');
 
-        function getPagination(table) {
-            var lastPage = 1;
-
-            $('#maxRows')
-                .on('change', function(evt) {
-
-                    lastPage = 1;
-                    $('.pagination')
-                        .find('li')
-                        .slice(1, -1)
-                        .remove();
-                    var trnum = 0; // reset tr counter
-                    var maxRows = parseInt($(this).val()); // get Max Rows from select option
-
-                    if (maxRows == 5000) {
-                        $('.pagination').hide();
-                    } else {
-                        $('.pagination').show();
-                    }
-
-                    var totalRows = $(table + ' tbody tr').length; // numbers of rows
-                    $(table + ' tr:gt(0)').each(function() {
-                        // each TR in  table and not the header
-                        trnum++; // Start Counter
-                        if (trnum > maxRows) {
-                            // if tr number gt maxRows
-
-                            $(this).hide(); // fade it out
-                        }
-                        if (trnum <= maxRows) {
-                            $(this).show();
-                        } // else fade in Important in case if it ..
-                    }); //  was fade out to fade it in
-                    if (totalRows > maxRows) {
-                        // if tr total rows gt max rows option
-                        var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
-                        //	numbers of pages
-                        for (var i = 1; i <= pagenum;) {
-                            // for each page append pagination li
-                            $('.pagination #prev')
-                                .before(
-                                    '<li data-page="' +
-                                    i +
-                                    '">\
-								  <span>' +
-                                    i++ +
-                                    '<span class="sr-only">(current)</span></span>\
-								</li>'
-                                )
-                                .show();
-                        } // end for i
-                    } // end if row count > max rows
-                    $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
-                    $('.pagination li').on('click', function(evt) {
-                        // on click each page
-                        evt.stopImmediatePropagation();
-                        evt.preventDefault();
-                        var pageNum = $(this).attr('data-page'); // get it's number
-
-                        var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
-
-                        if (pageNum == 'prev') {
-                            if (lastPage == 1) {
-                                return;
-                            }
-                            pageNum = --lastPage;
-                        }
-                        if (pageNum == 'next') {
-                            if (lastPage == $('.pagination li').length - 2) {
-                                return;
-                            }
-                            pageNum = ++lastPage;
-                        }
-
-                        lastPage = pageNum;
-                        var trIndex = 0; // reset tr counter
-                        $('.pagination li').removeClass('active'); // remove active class from all li
-                        $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
-                        // $(this).addClass('active');					// add active class to the clicked
-                        limitPagging();
-                        $(table + ' tr:gt(0)').each(function() {
-                            // each tr in table not the header
-                            trIndex++; // tr index counter
-                            // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
-                            if (
-                                trIndex > maxRows * pageNum ||
-                                trIndex <= maxRows * pageNum - maxRows
-                            ) {
-                                $(this).hide();
-                            } else {
-                                $(this).show();
-                            } //else fade in
-                        }); // end of for each tr in table
-                    }); // end of on click pagination list
-                    limitPagging();
-                })
-                .val(5)
-                .change();
-
-            // end of on select change
-
-            // END OF PAGINATION
-        }
-
-        function limitPagging() {
-            // alert($('.pagination li').length)
-
-            if ($('.pagination li').length > 7) {
-                if ($('.pagination li.active').attr('data-page') <= 3) {
-                    $('.pagination li:gt(5)').hide();
-                    $('.pagination li:lt(5)').show();
-                    $('.pagination [data-page="next"]').show();
-                }
-                if ($('.pagination li.active').attr('data-page') > 3) {
-                    $('.pagination li:gt(0)').hide();
-                    $('.pagination [data-page="next"]').show();
-                    for (let i = (parseInt($('.pagination li.active').attr('data-page')) - 2); i <= (parseInt($('.pagination li.active').attr('data-page')) + 2); i++) {
-                        $('.pagination [data-page="' + i + '"]').show();
-
-                    }
-
-                }
-            }
-        }
-    </script>
     <script>
         $("#show").click(function() {
             $('#myModal').modal('show');
@@ -814,8 +705,9 @@
             $('#myModal').modal('hide');
         });
 
-        function showUpdate(id, que, opt1, opt2, opt3, opt4, language) {
-            //alert(id + que + opt1 + opt2 + opt3 + opt4 + language)
+        function showUpdate(id, que, opt1, opt2, opt3, opt4, answer, language) {
+            //alert(answer)
+            //alert(id + que + opt1 + opt2 + opt3 + opt4 + language + answer)
             $('#updateModal').modal('show');
             var ques1 = $("#update_quiz input[name=question]");
             var quizU1 = $("#update_quiz input[name=opt1]");
@@ -823,12 +715,12 @@
             var quizU3 = $("#update_quiz input[name=opt3]");
             var quizU4 = $("#update_quiz input[name=opt4]");
             $("#updateModal #exam option[value='" + language + "']").prop('selected', true);
+            $("#updateModal #answer option[value=" + answer + "]").prop('selected', true);
             ques1.val(que);
             quizU1.val(opt1);
             quizU2.val(opt2);
             quizU3.val(opt3);
             quizU4.val(opt4);
-
 
             $('#update_quiz').submit(() => {
                 $("#update_quiz #err_exam").html("")
@@ -837,6 +729,7 @@
                 $("#update_quiz #err_opt2").html("")
                 $("#update_quiz #err_opt3").html("")
                 $("#update_quiz #err_opt4").html("")
+                $("#update_quiz #err_answer").html("")
                     // $("update_quiz #err_opt4").html("");
                 if ($("#updateModal #exam").val() == "") {
                     $("#update_quiz #err_exam").html("Select subject");
@@ -882,6 +775,11 @@
                     $("#update_quiz #err_opt4").html("Option can't be greater than 100");
                     $("#update_quiz #opt4").focus();
                     return false;
+                } else if ($("#updateModal #answer").val() == "") {
+                    $("#update_quiz #err_answer").html("Select Answer");
+                    $("#update_quiz #err_answer").focus();
+                    return false;
+
                 } else {
                     document.getElementById('update_quiz').action = '/quizUpdate/' + id
                     return true;
@@ -896,6 +794,15 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
+    <!-- data tabel script -->
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(() => {
+            $('#mytable').DataTable();
+        });
+    </script>
+
 </body>
 
 </html>

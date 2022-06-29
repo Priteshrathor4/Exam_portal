@@ -63,9 +63,55 @@
                         <div class="tabulation animate-box">
                             <div class="tab-content">
                                 <div class="row" style="text-align: justify;">
-                                    <h2 style="text-align: center; justify-content: center; color: #db4118;"><span for="from">Thank you</span></h2>
+                                    <h1 style="text-align: center; justify-content: center; color: #db4118; font-size: 8rem;">
+                                        <span for="from">Thank you</span></h1>
+                                </div>
+                                <br>
 
-
+                                <div class="row" style="text-align : justify;">
+                                    <h4>
+                                        <div class="container-fluid">
+                                            <table class="table" style="width: 50%; position: relative; left: 30rem;">
+                                                <thead>
+                                                    <tr>
+                                                        <!-- <th scope="col"><span class="fs-6" style="position: relative;left: 4rem;">Name</span></th> -->
+                                                        <th scope="col">
+                                                            <span class="fs-6" style="position: relative;left: 4rem;">
+                                                                Exam
+                                                            </span>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <span class="fs-6" style="position: relative;left: 4rem;">
+                                                                Your Score
+                                                            </span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <!-- <td style="position: relative;left: 4rem;" scope="row">jatan</td> -->
+                                                        <td style="position: relative;left: 4rem;">
+                                                            <% if(subject == '1'){%>
+                                                                HTML
+                                                                <%}else if(subject == '2'){%>
+                                                                    CSS
+                                                                    <%}else{%>
+                                                                        JavaScript
+                                                                        <%} %>
+                                                        </td>
+                                                        <td style="position: relative;left: 4rem;">
+                                                            <%= marks%>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </h4>
+                                    <!-- <div style="text-align: center;">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        Back to Home Page
+                                      </button>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -73,7 +119,6 @@
                 </div>
             </div>
             <!-- END fh5co-page -->
-
         </div>
         <!-- END fh5co-wrapper -->
 

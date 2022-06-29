@@ -67,11 +67,16 @@
                                         <%= success %>
                                     </div>
                                     <% } %>
+
                                         <div class="row" style="text-align: justify;">
-                                            <h2 style="text-align: center; justify-content: center; color: #db4118;"><span for="from">Terms And Conditions</span></h2>
+                                            <h2 style="text-align: center; justify-content: center; color: #db4118;">
+                                                <span for="from">Terms And Conditions</span></h2>
                                             <div class="col-lg-12 col-xxs-12 col-xs-12 mt">
                                                 <div class="input-field">
-                                                    <label for="from">Our platform is an interactive channel to help you perpare for various online examnination.Read the all instructions properly and then select checkbox. If you not select the checkbox then you can not start this exam. </label>
+                                                    <label for="from">Our platform is an interactive channel to help you
+                                                        perpare for various online examnination.Read the all
+                                                        instructions properly and then select checkbox. If you not
+                                                        select the checkbox then you can not start this exam. </label>
                                                 </div>
                                             </div>
 
@@ -86,37 +91,82 @@
                                                         <% } %>
                                                 </ol>
                                             </div>
+
+
                                         </div>
-                                        <form id="termsForm" name="termsForm" method="get" target="_blank">
+                                        <form id="termsForm" name="termsForm" method="get">
                                             <!---student ID-->
                                             <div class="row m-4 my-4">
-                                                <div class="col-md-5 col-sm-6 col-12 my-4" style="color: #db4118;align-items: center;justify-content: center;">
+                                                <div class="col-lg-12 col-12 my-4" style="color: #db4118;align-items: center;justify-content: center;">
                                                     <strong>Student Id:</strong> &nbsp;
                                                     <input type="text" id="stuId" name="stuId" value="<%= id %> " readonly>
                                                 </div>
-                                                <div class="col-md-4 col-sm-6 col-12">
+                                                <br><br>
+                                                <div class="col-lg-4 col-md-4 col-sm-6 col-12 my-4">
                                                     <select class="cs-select cs-skin-border" id="drdow2" name="exam">
-                                                <option value="">Select Your Interested Exam</option>
-                                                <option value="1">HTML</option>
-                                                <option value="2">CSS</option>
-                                                <option value="3">JavaScript</option>
-                                            </select>
+                                                        <option value="">Select Your Interested Exam</option>
+                                                        <option value="1">HTML</option>
+                                                        <option value="2">CSS</option>
+                                                        <option value="3">JavaScript</option>
+                                                    </select>
                                                 </div>
                                                 <small id="err_exam" class="mx-4 px-3 error"></small>
                                             </div>
                                             <div class="mx-2 my-3" style="color: #db4118;align-items: center;justify-content: center;">
                                                 <input type="checkbox" id="test" name="Applying_for2" style="align-items: center;justify-content: center; margin-top: 20px;"><strong>&nbsp;I
-                                            accept
-                                            all the terms and conditions.</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    accept all the terms and conditions.</strong>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <span id="err_terms" class="mx-4 px-3 error"></span>
                                             </div><br>
                                             <!-- </div> -->
                                             <div class="col-lg-12 col-xxs-12 col-xs-6 mt text-center">
-                                                <button type="submit" class="btn btn-outline-danger btn-lg" id="submit">Start
-                                            Exam</button>
+                                                <button type="submit" class="btn btn-outline-danger btn-lg" id="submit">Start Exam</button>
+                                                <% if(result.length>0){ %>
+                                                    <button type="button" class="btn btn-outline-danger btn-lg" id="result"><a href="#t1" style="color:rgb(145,145,144)!important;" rel="modal:open">Previous Score</a></button>
+                                                    <%} %>
+
                                             </div>
                                         </form>
+                                        <div class="col-lg-12 col-xxs-12 col-xs-12 mt">
 
+                                            <div id="t1" class="modal">
+                                                <table class="table" style="color:black!important;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col"><span class="fs-6">Exam</span></th>
+                                                            <th scope="col"><span class="fs-6">Result</span></th>
+                                                            <th scope="col"><span class="fs-6">Date</span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% for(let i=0; i<result.length; i++){ %>
+
+                                                            <tr>
+
+
+                                                                <td>
+                                                                    <% if(result[i].subject=="1" ){ %>
+                                                                        HTML
+                                                                        <%} else if(result[i].subject=="2" ) {%>
+                                                                            CSS
+                                                                            <% } else{%>
+                                                                                JavaScript
+                                                                                <%} %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= result[i].marks %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= result[i].created_at.toLocaleString() %>
+                                                                </td>
+
+                                                            </tr>
+                                                            <% } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                        </div>
                             </div>
                         </div>
                     </div>
@@ -178,17 +228,21 @@
             } else {
                 //document.getElementById('termsForm').action = '/question' + drdow2;
                 let myTab;
-                myTab = window.open('http://localhost:3000/question' + drdow2 + '?exam=1&Applying_for2=on', "newWin", 'height=' + screen.height,
-                    'width=' + screen.width,
-                    'fullscreen=yes');
-                return true
+                myTab = window.open('http://localhost:3000/question' + drdow2 + '?exam=1&Applying_for2=on', "newWin", 'height=' + screen.height, 'width=' + screen.width, 'fullscreen=yes');
+                return false
 
 
             }
         });
+
+        // $('#result').click(() => {
+        //     $('#t1').toggle();
+        // });
     </script>
 
-
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </body>
 
 </html>
